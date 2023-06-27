@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SubjectController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +29,4 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/user_subject', [SubjectController::class, 'getUserSubject']);

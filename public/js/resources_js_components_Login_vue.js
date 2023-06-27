@@ -29,7 +29,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context.prev = _context.next) {
             case 0:
               event.preventDefault();
-              // Simulate login request
               _context.prev = 1;
               _context.next = 4;
               return axios.post('/api/auth/login', {
@@ -38,29 +37,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               });
             case 4:
               response = _context.sent;
-              console.log(response.data);
-              //return response.data;
               if (response.data.status == true) {
                 window.sessionStorage.setItem('name', response.data.user.name);
                 window.sessionStorage.setItem('id', response.data.user.id);
                 router.push({
-                  name: 'Dashboard',
-                  params: {
-                    id: response.data.user.id
-                  }
+                  name: 'Dashboard'
                 });
               }
-              _context.next = 12;
+              _context.next = 11;
               break;
-            case 9:
-              _context.prev = 9;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context["catch"](1);
               console.error(_context.t0);
-            case 12:
+            case 11:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[1, 9]]);
+        }, _callee, null, [[1, 8]]);
       }));
       return function login(_x) {
         return _ref.apply(this, arguments);

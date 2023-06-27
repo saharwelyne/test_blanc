@@ -20128,7 +20128,7 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createRouter)({
       return __webpack_require__.e(/*! import() */ "resources_js_components_Login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/Login */ "./resources/js/components/Login.vue"));
     }
   }, {
-    path: '/dashboard/:id',
+    path: '/dashboard',
     name: 'Dashboard',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Dashboard_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/Dashboard */ "./resources/js/components/Dashboard.vue"));
@@ -20153,7 +20153,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
   modules: {
-    subject: _store_subject__WEBPACK_IMPORTED_MODULE_0__["default"]
+    subjectModule: _store_subject__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);
@@ -20174,44 +20174,38 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-
 var subjectModule = {
   state: {
     subjects: []
   },
-  mutations: {
-    setSubjects: function setSubjects(state, subjects) {
-      state.subjects = subjects;
-    }
-  },
   actions: {
-    fetchSubjects: function fetchSubjects(_ref) {
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var commit, response, subjects;
+    addSubject: function () {
+      var _addSubject = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(_ref, payload) {
+        var commit, state, dispatch;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              commit = _ref.commit;
-              _context.prev = 1;
-              _context.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/user_subject/1');
-            case 4:
-              response = _context.sent;
-              // Replace with your Laravel route for fetching subjects
-              subjects = response.data;
-              commit('setSubjects', subjects);
-              _context.next = 12;
-              break;
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
-              console.error('Error fetching subjects:', _context.t0);
-            case 12:
+              commit = _ref.commit, state = _ref.state, dispatch = _ref.dispatch;
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/user_subject/', payload).then(function (response) {
+                state.subjects = response.data;
+                console.log(response);
+              })["catch"](function (error) {});
+            case 3:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[1, 9]]);
-      }))();
+        }, _callee);
+      }));
+      function addSubject(_x, _x2) {
+        return _addSubject.apply(this, arguments);
+      }
+      return addSubject;
+    }()
+  },
+  getters: {
+    getSubjects: function getSubjects(state) {
+      return state.subjects;
     }
   }
 };

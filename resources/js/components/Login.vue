@@ -25,22 +25,20 @@ export default {
     const username = ref('');
     const password = ref('');
     const error = ref('');
-const router = useRouter();
+    const router = useRouter();
 
     const login = async (event) => {
       event.preventDefault();
-      // Simulate login request
+  
        try {
             const response =  await axios.post('/api/auth/login', { email:username.value , password:password.value });
-            console.log(response.data);
-            //return response.data;
-             if(response.data.status == true){
+
+            if(response.data.status == true){
                 window.sessionStorage.setItem('name', response.data.user.name);
                 window.sessionStorage.setItem('id', response.data.user.id);
 
                 router.push({
                             name:'Dashboard',  
-                            params: { id: response.data.user.id }, 
                 })
              }
         } 
